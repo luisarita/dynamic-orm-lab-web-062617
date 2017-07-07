@@ -15,14 +15,14 @@ class InteractiveRecord
         end.join(" AND ")
         
         sql_statement = <<-SQL
-            SELECT #{ATTRIBUTES.keys.join(",")} FROM #{table_name} WHERE #{search_fields}
+            SELECT #{@ATTRIBUTES.keys.join(",")} FROM #{table_name} WHERE #{search_fields}
         SQL
         rows = DB[:conn].execute(sql_statement, values)
         hash_from_db(rows)
     end
 
     def self.column_names
-        ATTRIBUTES.keys.to_a
+        @ATTRIBUTES.keys.to_a
     end
 
     def self.table_name
@@ -34,7 +34,7 @@ class InteractiveRecord
     end
 
     def self.fields
-        ATTRIBUTES.select {|attribute| attribute != PRIMARY_KEY}.map do |attribute, datatype|
+        @ATTRIBUTES.select {|attribute| attribute != PRIMARY_KEY}.map do |attribute, datatype|
             "#{attribute}" 
         end
     end
@@ -92,7 +92,7 @@ class InteractiveRecord
     def self.new_from_db(row)
         return nil if row.nil?
         hash = {}
-        ATTRIBUTES.keys.each_with_index do |attribute, index|
+        @ATTRIBUTES.keys.each_with_index do |attribute, index|
             hash[attribute] = row[index]
         end
         self.new(hash)
@@ -103,7 +103,7 @@ class InteractiveRecord
 
         rows.map do |row|
             hash = {}
-            ATTRIBUTES.keys.each_with_index do |attribute, index|
+            @ATTRIBUTES.keys.each_with_index do |attribute, index|
                 hash[attribute] = row[index]
                 hash[index] = row[index] #Don't understand why the test would want the data indexed and associated
             end

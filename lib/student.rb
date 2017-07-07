@@ -5,7 +5,7 @@ require 'interactive_record.rb'
 class Student < InteractiveRecord
     attr_accessor :name, :id, :grade
 
-    ATTRIBUTES = {
+    @ATTRIBUTES = {
         "id" => "integer",
         "name" => "text",
         "grade" => "text"
