@@ -2,9 +2,9 @@ require_relative "../config/environment.rb"
 #require 'active_support/inflector'
 
 class InteractiveRecord
-    ATTRIBUTES = {"id" => "integer",
-            "name" => "text",
-            "grade" => "text"}
+    #ATTRIBUTES = {"id" => "integer",
+    #        "name" => "text",
+    #        "grade" => "text"}
     PRIMARY_KEY = "id"
 
     def self.find_by(hash)
